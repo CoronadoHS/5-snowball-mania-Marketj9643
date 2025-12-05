@@ -1,9 +1,9 @@
 ''' 
     Name: Snowball-Mania
-    Author: 
-    Date: 
+    Author: Tyler Markel
+    Date: December 5, 2025
     Class: AP Computer Science Principles
-    Python: 
+    Python: 3.13
 '''
 
 import random
@@ -47,6 +47,8 @@ def getThrower(players):
     '
     ' Return: player name
     '''
+    thrower = random.choice(players)
+    return thrower
 
     
 def getVictim(players, t):
@@ -59,6 +61,10 @@ def getVictim(players, t):
     '
     ' Return: victim's name
     '''
+    victim = random.choice(players)
+    while (t == victim):
+        victim = random.choice(players)
+    return victim
 
 
 def getHitResult():
@@ -71,7 +77,9 @@ def getHitResult():
     '
     ' Return: Boolean representing whether or not the snowball hit
     '''
-    
+    hitNum = random.randint(1, 10)
+    if hitNum > 4:
+        return True
 
 def playSnowballFight(players):
     '''
@@ -89,6 +97,20 @@ def playSnowballFight(players):
     ' 
     ' Return: none
     '''
+    while len(players) > 1:
+        thrower = getThrower(players)
+        victim = getVictim(players, thrower)
+        hitResult = getHitResult()
+        if hitResult == True:
+            koResult = random.randint(1, 2)
+            if koResult == 1:
+                print(thrower + " hits and knocks out " + victim) 
+                players.remove(victim)     
+            else:
+                print(thrower + " throws at " + victim + " but " + victim + " dodges ")
+        else:
+            print(thrower + " throws at " + victim + " but misses ")
+        time.sleep(3)
 
     
 def printOutro(winner):
@@ -115,3 +137,20 @@ def runProgram():
     '
     ' Return: none
     '''
+    printIntro()
+
+runProgram()
+
+
+testPlayers = ["Daniel", "Ben", "Adrian", "Sebas", "Tyler", "Aron", "Collin"]
+playSnowballFight(testPlayers)
+printIntro(testPlayers[0])
+# testThrower = getThrower(testPlayers)
+# testVictim = getVictim(testPlayers, testThrower)
+# testHit = getHitResult()
+# if testHit == True:
+#     print("Blam!")
+# else:
+#     print("Whiff!")
+
+# print(testThrower + " throws at " +  testVictim)
