@@ -37,7 +37,16 @@ def getNames():
     ' Return: the list of player names
     ' 
     '''
-
+    playerList = []
+    myName = input("What is your name?   ")
+    playerList.append(myName)
+    print("Add more players ONE AT A TIME by typing their names and hitting ENTER (Type DONE when finished).")
+    nextName = input()
+    while (nextName != "DONE"):
+        playerList.append(nextName)
+        nextName = input()
+    print("Great! Time to play!")
+    return playerList
 
 def getThrower(players):
     '''
@@ -78,7 +87,7 @@ def getHitResult():
     ' Return: Boolean representing whether or not the snowball hit
     '''
     hitNum = random.randint(1, 10)
-    if hitNum > 4:
+    if (hitNum > 4):
         return True
 
 def playSnowballFight(players):
@@ -97,19 +106,19 @@ def playSnowballFight(players):
     ' 
     ' Return: none
     '''
-    while len(players) > 1:
+    while (len(players) > 1):
         thrower = getThrower(players)
         victim = getVictim(players, thrower)
         hitResult = getHitResult()
         if hitResult == True:
             koResult = random.randint(1, 2)
             if koResult == 1:
-                print(thrower + " hits and knocks out " + victim) 
+                print(thrower + " hits and knocks out " + victim + "!!!") 
                 players.remove(victim)     
             else:
-                print(thrower + " throws at " + victim + " but " + victim + " dodges ")
+                print(thrower + " throws at " + victim + " but " + victim + " dodges and survives")
         else:
-            print(thrower + " throws at " + victim + " but misses ")
+            print(thrower + " throws at " + victim + " but" + thrower + "misses and " + victim + "survives")
         time.sleep(3)
 
     
@@ -138,13 +147,15 @@ def runProgram():
     ' Return: none
     '''
     printIntro()
+    #testPlayers = ["Abraham Lincoln", "JFK", "James A Garfield", "Willam McKinley"]
+    testPlayers = getNames()
+    playSnowballFight(testPlayers)
+    printOutro(testPlayers[0])
 
 runProgram()
 
 
-testPlayers = ["Daniel", "Ben", "Adrian", "Sebas", "Tyler", "Aron", "Collin"]
-playSnowballFight(testPlayers)
-printIntro(testPlayers[0])
+
 # testThrower = getThrower(testPlayers)
 # testVictim = getVictim(testPlayers, testThrower)
 # testHit = getHitResult()
