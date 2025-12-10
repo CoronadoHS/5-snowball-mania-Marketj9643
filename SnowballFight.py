@@ -10,6 +10,8 @@ import random
 import time
 from colorama import init, Fore, Back, Style
 
+init()
+    
 def printIntro():
     '''
     ' Param: none
@@ -110,15 +112,25 @@ def playSnowballFight(players):
         thrower = getThrower(players)
         victim = getVictim(players, thrower)
         hitResult = getHitResult()
+
+        survives1 = thrower + " throws at " + victim + " but " + victim + Fore.BLUE + " dodges and survives" + Style.RESET_ALL
+        survives2 = thrower + " tries to hit " + victim + " . . . and does but the snowball bounces off and " + victim + Fore.BLUE + " survives" + Style.RESET_ALL
+        surviveMessages = [survives1, survives2]
+        Hit1 = thrower + Fore.YELLOW + " hits and knocks out " + victim + "!!!" + Style.RESET_ALL
+        Hit2 = thrower + Fore.YELLOW + " absolutely domes " + victim + Style.RESET_ALL
+        hitMessages = [Hit1, Hit2]
+        miss1 = thrower + " throws at " + victim + " but " + thrower + " misses and " + victim + Fore.LIGHTGREEN_EX + " survives" + Style.RESET_ALL
+        miss2 = thrower + " throws at " + victim + " but the snowball disintegrates before hitting and " + victim + Fore.LIGHTGREEN_EX + " survives" + Style.RESET_ALL
+        missMessages = [miss1, miss2]
         if hitResult == True:
             koResult = random.randint(1, 2)
             if koResult == 1:
-                print(thrower + " hits and knocks out " + victim + "!!!") 
-                players.remove(victim)     
+                print(random.choice(hitMessages)) 
+                players.remove(victim)
             else:
-                print(thrower + " throws at " + victim + " but " + victim + " dodges and survives")
+                print(random.choice(surviveMessages))
         else:
-            print(thrower + " throws at " + victim + " but" + thrower + "misses and " + victim + "survives")
+            print(random.choice(missMessages))
         time.sleep(3)
 
     
@@ -147,7 +159,7 @@ def runProgram():
     ' Return: none
     '''
     printIntro()
-    #testPlayers = ["Abraham Lincoln", "JFK", "James A Garfield", "Willam McKinley"]
+    #testPlayers = ["Olympos", "Hoplite", "Chimera", "Centaur", "Medusa", "Spartan", "Sparrowhawk", "Slingshot",]
     testPlayers = getNames()
     playSnowballFight(testPlayers)
     printOutro(testPlayers[0])
